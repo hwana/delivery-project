@@ -1,5 +1,6 @@
-package com.project.spring.food.domain;
+package com.project.delivery.food.domain;
 
+import com.project.delivery.config.BaseTimeEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -8,11 +9,11 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @NoArgsConstructor
-public class food {
+public class food extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
 
     private String name;
 
@@ -21,5 +22,4 @@ public class food {
     private String category;
 
     private String image;
-
 }
