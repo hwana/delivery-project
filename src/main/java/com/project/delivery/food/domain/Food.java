@@ -5,11 +5,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @NoArgsConstructor
-public class food extends BaseTimeEntity {
+@Getter
+public class Food extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,4 +25,12 @@ public class food extends BaseTimeEntity {
     private String category;
 
     private String image;
+
+    @Builder
+    public Food(String name, int price, String category, String image) {
+        this.name = name;
+        this.price = price;
+        this.category = category;
+        this.image = image;
+    }
 }
