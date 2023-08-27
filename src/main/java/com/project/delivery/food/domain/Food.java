@@ -33,4 +33,11 @@ public class Food extends BaseTimeEntity {
         this.category = category;
         this.image = image;
     }
+
+    public void update(String name, int price, String category, String image) {
+        this.name = name;
+        this.price = price;
+        this.category = category;
+        this.image = image;
+    }
 }

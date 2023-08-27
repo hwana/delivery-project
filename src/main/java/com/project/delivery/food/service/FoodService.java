@@ -3,6 +3,7 @@ package com.project.delivery.food.service;
 import com.project.delivery.food.domain.Food;
 import com.project.delivery.food.dto.FoodRequestDto;
 import com.project.delivery.food.repository.FoodRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,5 +18,16 @@ public class FoodService {
 
     public Food findById(Long id) {
         return foodRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+    }
+
+    @Transactional
+    public Food updateFood(Long id, FoodRequestDto foodRequestDto) {
+        Food food = foodRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+        food.update(foodRequestDto.getName(), foodRequestDto.getPrice(), foodRequestDto.getCategory(), foodRequestDto.getImage());
+        return food;
+    }
+
+    public void deleteFood(Long id) {
+        foodRepository.deleteById(id);
     }
 }
