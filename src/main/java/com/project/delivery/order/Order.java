@@ -1,5 +1,6 @@
 package com.project.delivery.order;
 
+import com.project.delivery.delivery.Delivery;
 import com.project.delivery.orderfood.OrderFood;
 import com.project.delivery.user.User;
 import jakarta.persistence.*;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "ORDERS")
 public class Order {
 
     @Id
@@ -28,6 +30,10 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
+    @OneToOne
+    @JoinColumn(name = "DELIVERY_ID")
+    private Delivery delivery;
+
     public void setUser(User user){
         if(this.user != null){
             this.user.getOrders().remove(this);
@@ -40,6 +46,11 @@ public class Order {
     public void addOrderFood(OrderFood orderFood){
         orderFoodList.add(orderFood);
         orderFood.setOrder(this);
+    }
+
+    public void setDelivery(Delivery delivery){
+        this.delivery = delivery;
+        delivery.setOrder(this);
     }
 
 }
